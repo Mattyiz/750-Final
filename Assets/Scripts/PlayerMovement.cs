@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public float speed = .5f;
     private float yVelocity;
 
+    public bool menuUp;
+    public GameObject menu;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,10 +30,12 @@ public class PlayerMovement : MonoBehaviour
 
         yVelocity = 0;
 
-        Enable();
+        controls.Player.Menu.Enable();
+        controls.Player.Menu.performed += _ => ToggleMenu();
 
-        //controls.PlayerMovement.Jump.canceled += _ => OnJumpUpInput();   // Figure out how to do GetKeyUp with new input system
-        //controls.Player.Dash.performed += _ => OnDashInput();
+        menuUp = false;
+
+        Enable();
 
     }
 
@@ -36,8 +43,11 @@ public class PlayerMovement : MonoBehaviour
     {
         controls.Player.Move.Enable();
         controls.Player.Jump.Enable();
+        controls.Player.Reset.Enable();
 
         controls.Player.Jump.performed += _ => Jump();
+        controls.Player.Reset.performed += _ => Reset();
+
 
     }
 
@@ -45,8 +55,26 @@ public class PlayerMovement : MonoBehaviour
     {
         controls.Player.Move.Disable();
         controls.Player.Jump.Disable();
+        controls.Player.Reset.Disable();
 
         controls.Player.Jump.performed -= _ => Jump();
+        controls.Player.Reset.performed -= _ => Reset();
+    }
+
+    private void ToggleMenu()
+    {
+        if(menuUp)
+        {
+            Enable();
+            menu.SetActive(false);
+            menuUp = false;
+        }
+        else
+        {
+            Disable();
+            menu.SetActive(true);
+            menuUp = true;
+        }
     }
 
     // Update is called once per frame
@@ -57,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("Move " + moveInput.x * speed);
         transform.position += new Vector3(moveInput.x * speed, 0, 0);
 
-        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, Mathf.Abs(yVelocity) + .1f, groundLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, Mathf.Abs(yVelocity) + .1f, groundLayerMask); //Raycasts to avoid tunneling
         if (hit.collider != null && yVelocity <= 0)
         {
             
@@ -74,13 +102,28 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
 
-        if (yVelocity > -3 && !grounded)
+        
+
+        if(!menuUp)
         {
-            yVelocity -= .8f * Time.fixedDeltaTime;
+            transform.position += new Vector3(0, yVelocity, 0);
+
+            if (yVelocity > -3 && !grounded)
+            {
+                yVelocity -= .8f * Time.fixedDeltaTime;
+            }
         }
 
-        transform.position += new Vector3(0, yVelocity, 0);
+        if (transform.position.y < -22)
+        {
+            Reset();
+        }
 
+    }
+
+    private void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void Jump()
