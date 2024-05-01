@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     public bool menuUp;
     public GameObject menu;
 
+    [SerializeField] private CollisionManager collisionManager;
+    private bool justJumped;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Menu.performed += _ => ToggleMenu();
 
         menuUp = false;
+        justJumped = false;
 
         Enable();
 
@@ -81,32 +85,16 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
+        Vector3 move = new Vector3(0, 0, 0);
+
+        //Horizontal movement
         moveInput = controls.Player.Move.ReadValue<Vector2>();
-        //Debug.Log("Move " + moveInput.x * speed);
-        transform.position += new Vector3(moveInput.x * speed, 0, 0);
+        move.x = moveInput.x * speed;
 
-        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, Mathf.Abs(yVelocity) + .1f, groundLayerMask); //Raycasts to avoid tunneling
-        if (hit.collider != null && yVelocity <= 0)
-        {
-            
-            if(yVelocity * -1 >= hit.distance)
-            {
-                transform.position += new Vector3(0, -hit.distance, 0);
-                yVelocity = 0;
-                grounded = true;
-            }
-            
-        }
-        else
-        {
-            grounded = false;
-        }
-
-        
-
+        //Gravity
         if(!menuUp)
         {
-            transform.position += new Vector3(0, yVelocity, 0);
+            move.y = yVelocity;
 
             if (yVelocity > -3 && !grounded)
             {
@@ -114,11 +102,64 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        //Die from falling
         if (transform.position.y < -22)
         {
             Reset();
         }
 
+        Vector3 TR = transform.position + (transform.localScale / 2);
+
+        Vector3 TL = TR;
+        TL.x -= transform.localScale.x;
+
+        Vector3 BL = transform.position - (transform.localScale / 2);
+
+        Vector3 BR = BL;
+        BR.x += transform.localScale.x;
+
+        //Debug.Log("TR - " + TR + " TL - " + TL + " BR - " + BR + " BL - " + BL);
+
+        if (grounded)
+        {
+            if(collisionManager.HorizontalCheck(TR, TL, BR, BL, new Vector3(move.x, 0, 0)))
+            {
+                move.x = 0;
+            }
+        }else
+        {
+            if (collisionManager.HorizontalCheck(TR, TL, BR, BL, move))
+            {
+                move.x = 0;
+            }
+        }
+        if (justJumped)
+        {
+            justJumped = false;
+        }
+        else
+        {
+            if (collisionManager.VerticalCheck(TR, TL, BR, BL, move))
+            {
+                if (move.y <= 0)
+                {
+                    grounded = true;
+                }
+                else
+                {
+                    yVelocity = 0;
+                }
+                move.y = 0;
+                //yVelocity = 0;
+            }
+            else
+            {
+
+                grounded = false;
+            }
+        }
+        
+        transform.position += move;
     }
 
     private void Reset()
@@ -130,7 +171,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if(grounded)
         {
-            yVelocity += .4f;
+            yVelocity = .4f;
+            grounded = false;
+            justJumped = true;
+            transform.position += new Vector3(0, yVelocity, 0);
         }
     }
 }
