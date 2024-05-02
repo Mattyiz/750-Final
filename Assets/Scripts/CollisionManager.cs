@@ -26,6 +26,11 @@ public class CollisionManager : MonoBehaviour
     public float HorizontalCheck(Vector3 checkTR, Vector3 checkTL, Vector3 checkBL, Vector3 checkBR, Vector3 moveVelocity)
     {
 
+        if(moveVelocity.x == 0)
+        {
+            return moveVelocity.x;
+        }
+
         Vector3 newTR = checkTR + moveVelocity;
         Vector3 newTL = checkTL + moveVelocity;
         Vector3 newBR = checkBR + moveVelocity;
@@ -40,20 +45,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsTR.Length; i++)
                     {
-                        if (newTL.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2)) &&
-                            newTL.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2))) //top of check is within the platforms y range
+                        if (newTL.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2) + .01f) &&
+                            newTL.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTL.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2)) &&
-                                newTL.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2))) //left side of check is within the platforms x range
+                            if (newTL.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2) + .01f) &&
+                                newTL.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
                             {
                                 return (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2)) - checkTL.x;
                             }
                         }
-                        else if (newBL.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2)) &&
-                                newBL.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2))) //bottom of check is within the platforms y range
+                        else if (newBL.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2) + .01f) &&
+                                newBL.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBL.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2)) &&
-                                newBL.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2))) //left side of check is within the platforms x range
+                            if (newBL.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2) + .01f) &&
+                                newBL.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
                             {
                                 return (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2)) - checkBL.x;
                             }
@@ -64,20 +69,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsTL.Length; i++)
                     {
-                        if (newTL.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2)) &&
-                            newTL.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2))) //top of check is within the platforms y range
+                        if (newTL.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2) + .01f) &&
+                            newTL.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTL.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2)) &&
-                                newTL.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2))) //left side of check is within the platforms x range
+                            if (newTL.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2) + .01f) &&
+                                newTL.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
                             {
                                 return (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2)) - checkTL.x;
                             }
                         }
-                        else if (newBL.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2)) &&
-                                newBL.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2))) //bottom of check is within the platforms y range
+                        else if (newBL.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2) + .01f) &&
+                                newBL.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBL.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2)) &&
-                                newBL.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2))) //left side of check is within the platforms x range
+                            if (newBL.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2) + .01f) &&
+                                newBL.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
                             {
                                 return (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2)) - checkBL.x;
                             }
@@ -91,20 +96,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsBR.Length; i++)
                     {
-                        if (newTL.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2)) &&
-                            newTL.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2))) //top of check is within the platforms y range
+                        if (newTL.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2) + .01f) &&
+                            newTL.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTL.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2)) &&
-                                newTL.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2))) //left side of check is within the platforms x range
+                            if (newTL.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2) + .01f) &&
+                                newTL.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
                             {
                                 return (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2)) - checkTL.x;
                             }
                         }
-                        else if (newBL.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2)) &&
-                                newBL.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2))) //bottom of check is within the platforms y range
+                        else if (newBL.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2) + .01f) &&
+                                newBL.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBL.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2)) &&
-                                newBL.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2))) //left side of check is within the platforms x range
+                            if (newBL.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2) + .01f) &&
+                                newBL.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
                             {
                                 return (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2)) - checkBL.x;
                             }
@@ -115,20 +120,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsBL.Length; i++)
                     {
-                        if (newTL.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2)) &&
-                            newTL.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2))) //top of check is within the platforms y range
+                        if (newTL.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2) + .01f) &&
+                            newTL.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTL.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2)) &&
-                                newTL.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2))) //left side of check is within the platforms x range
+                            if (newTL.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2) + .01f) &&
+                                newTL.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
                             {
                                 return (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2)) - checkTL.x;
                             }
                         }
-                        else if (newBL.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2)) &&
-                                newBL.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2))) //bottom of check is within the platforms y range
+                        else if (newBL.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2) + .01f) &&
+                                newBL.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBL.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2)) &&
-                                newBL.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2))) //left side of check is within the platforms x range
+                            if (newBL.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2) + .01f) &&
+                                newBL.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
                             {
                                 return (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2)) - checkBL.x;
                             }
@@ -146,20 +151,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsTR.Length; i++)
                     {
-                        if (newTR.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2)) &&
-                            newTR.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2))) //top of check is within the platforms y range
+                        if (newTR.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2) + .01f) &&
+                            newTR.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTR.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2)) &&
-                                newTR.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2))) //right side of check is within the platforms x range
+                            if (newTR.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2) + .01f) &&
+                                newTR.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2)) - checkTR.x;
                             }
                         }
-                        else if (newBR.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2)) &&
-                                newBR.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2))) //bottom of check is within the platforms y range
+                        else if (newBR.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2) + .01f) &&
+                                newBR.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBR.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2)) &&
-                                newBR.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2))) //right side of check is within the platforms x range
+                            if (newBR.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2) + .01f) &&
+                                newBR.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2)) - checkBR.x;
                             }
@@ -170,20 +175,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsTL.Length; i++)
                     {
-                        if (newTR.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2)) &&
-                            newTR.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2))) //top of check is within the platforms y range
+                        if (newTR.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2) + .01f) &&
+                            newTR.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTR.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2)) &&
-                                newTR.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2))) //right side of check is within the platforms x range
+                            if (newTR.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2) + .01f) &&
+                                newTR.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2)) - checkTR.x;
                             }
                         }
-                        else if (newBR.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2)) &&
-                                newBR.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2))) //bottom of check is within the platforms y range
+                        else if (newBR.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2) + .01f) &&
+                                newBR.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBR.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2)) &&
-                                newBR.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2))) //right side of check is within the platforms x range
+                            if (newBR.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2) + .01f) &&
+                                newBR.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2)) - checkBR.x;
                             }
@@ -197,20 +202,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsBR.Length; i++)
                     {
-                        if (newTR.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2)) &&
-                            newTR.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2))) //top of check is within the platforms y range
+                        if (newTR.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2) + .01f) &&
+                            newTR.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTR.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2)) &&
-                            newTR.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2))) //right side of check is within the platforms x range
+                            if (newTR.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2) + .01f) &&
+                            newTR.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2)) - checkTR.x;
                             }
                         }
-                        else if (newBR.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2)) &&
-                                newBR.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2))) //bottom of check is within the platforms y range
+                        else if (newBR.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2) + .01f) &&
+                                newBR.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBR.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2)) &&
-                                newBR.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2))) //right side of check is within the platforms x range
+                            if (newBR.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2) + .01f) &&
+                                newBR.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2)) - checkBR.x;
                             }
@@ -221,20 +226,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsBL.Length; i++)
                     {
-                        if (newTR.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2)) &&
-                                newTR.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2))) //top of check is within the platforms y range
+                        if (newTR.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2) + .01f) &&
+                                newTR.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTR.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2)) &&
-                                newTR.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2))) //right side of check is within the platforms x range
+                            if (newTR.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2) + .01f) &&
+                                newTR.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2)) - checkTR.x;
                             }
                         }
-                        else if (newBR.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2)) &&
-                                newBR.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2))) //bottom of check is within the platforms y range
+                        else if (newBR.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2) + .01f) &&
+                                newBR.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBR.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2)) &&
-                                newBR.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2))) //right side of check is within the platforms x range
+                            if (newBR.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2) + .01f) &&
+                                newBR.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2)) - checkBR.x;
                             }
@@ -251,6 +256,11 @@ public class CollisionManager : MonoBehaviour
     public float VerticalCheck(Vector3 checkTR, Vector3 checkTL, Vector3 checkBL, Vector3 checkBR, Vector3 moveVelocity)
     {
 
+        if (moveVelocity.y == 0)
+        {
+            return moveVelocity.y;
+        }
+
         Vector3 newTR = checkTR + moveVelocity;
         Vector3 newTL = checkTL + moveVelocity;
         Vector3 newBR = checkBR + moveVelocity;
@@ -258,51 +268,51 @@ public class CollisionManager : MonoBehaviour
 
         if (moveVelocity.y < 0)
         {
-            //Uses TL and TR platforms
+            //Uses TL and TR platforms and moving down
             if (newTL.y >= 0)
             {
-                if (newTL.x >= 0) //TR
+                if (newTL.x >= 0) //TR and moving down
                 {
                     for (int i = 0; i < platormsTR.Length; i++)
                     {
-                        if (newBR.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2)) &&
-                            newBR.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2))) //top of check is within the platforms y range
+                        if (newBR.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2) + .01f) &&
+                            newBR.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2) - .01f)) //right of check is in x range
                         {
-                            if (newBR.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2)) &&
-                                newBR.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newBR.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2) + .01f) &&
+                                newBR.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2) - .01f)) //bottom of check is in y range
                             {
                                 return (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2)) - checkBR.y;
                             }
                         }
-                        else if (newBL.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2)) &&
-                                newBL.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2))) //bottom of check is within the platforms y range
+                        else if (newBL.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2) + .01f) &&
+                                newBL.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2) - .01f)) //left of check is in x range
                         {
-                            if (newBL.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2)) &&
-                                newBL.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newBL.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2) + .01f) &&
+                                newBL.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2) - .01f)) //bottom of check is in y range
                             {
                                 return (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2)) - checkBL.y;
                             }
                         }
                     }
                 }
-                else //TL
+                else //TL and down
                 {
                     for (int i = 0; i < platormsTL.Length; i++)
                     {
-                        if (newBR.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2)) &&
-                            newBR.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2))) //top of check is within the platforms y range
+                        if (newBR.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2) + .01f) &&
+                            newBR.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newBR.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2)) &&
-                                newBR.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newBR.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2) + .01f) &&
+                                newBR.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2) - .01f)) //bottom of check is in y range
                             {
                                 return (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2)) - checkBR.y;
                             }
                         }
-                        else if (newBL.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2)) &&
-                                newBL.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2))) //bottom of check is within the platforms y range
+                        else if (newBL.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2) + .01f) &&
+                                newBL.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBL.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2)) &&
-                                newBL.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newBL.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2) + .01f) &&
+                                newBL.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2) - .01f)) //bottom of check is in y range
                             {
                                 return (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2)) - checkBL.y;
                             }
@@ -312,48 +322,48 @@ public class CollisionManager : MonoBehaviour
             }
             else //BL and BR platforms
             {
-                if (newBR.x >= 0) //BR
+                if (newBR.x >= 0) //BR and down
                 {
                     for (int i = 0; i < platormsBR.Length; i++)
                     {
-                        if (newBR.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2)) &&
-                            newBR.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2))) //top of check is within the platforms y range
+                        if (newBR.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2) + .01f) &&
+                            newBR.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newBR.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2)) &&
-                                newBR.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newBR.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2) + .01f) &&
+                                newBR.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2) - .01f)) //bottom of check is in y range
                             {
                                 return (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2)) - checkBR.y;
                             }
                         }
-                        else if (newBL.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2)) &&
-                                newBL.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2))) //bottom of check is within the platforms y range
+                        else if (newBL.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2) + .01f) &&
+                                newBL.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBL.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2)) &&
-                                newBL.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newBL.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2) + .01f) &&
+                                newBL.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2) - .01f)) //bottom of check is in y range
                             {
                                 return (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2)) - checkBL.y;
                             }
                         }
                     }
                 }
-                else //BL
+                else //BL and down
                 {
                     for (int i = 0; i < platormsBL.Length; i++)
                     {
-                        if (newBR.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2)) &&
-                            newBR.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2))) //top of check is within the platforms y range
+                        if (newBR.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2) + .01f) &&
+                            newBR.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newBR.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2)) &&
-                                newBR.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newBR.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2) + .01f) &&
+                                newBR.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2) - .01f)) //bottom of check is in y range
                             {
                                 return (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2)) - checkBR.y;
                             }
                         }
-                        else if (newBL.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2)) &&
-                                newBL.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2))) //bottom of check is within the platforms y range
+                        else if (newBL.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2) + .01f) &&
+                                newBL.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newBL.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2)) &&
-                                newBL.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newBL.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2) + .01f) &&
+                                newBL.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2) - .01f)) //bottom of check is in y range
                             {
                                 return (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2)) - checkBL.y;
                             }
@@ -371,20 +381,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsTR.Length; i++)
                     {
-                        if (newTR.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2)) &&
-                            newTR.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2))) //top of check is within the platforms y range
+                        if (newTR.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2) + .01f) &&
+                            newTR.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTR.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2)) &&
-                                newTR.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newTR.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2) + .01f) &&
+                                newTR.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2)) - checkTR.y;
                             }
                         }
-                        else if (newTL.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2)) &&
-                                newTL.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2))) //bottom of check is within the platforms y range
+                        else if (newTL.x > (platormsTR[i].transform.position.x - (platormsTR[i].transform.localScale.x / 2) + .01f) &&
+                                newTL.x < (platormsTR[i].transform.position.x + (platormsTR[i].transform.localScale.x / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newTL.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2)) &&
-                                newTL.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newTL.y > (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2) + .01f) &&
+                                newTL.y < (platormsTR[i].transform.position.y + (platormsTR[i].transform.localScale.y / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsTR[i].transform.position.y - (platormsTR[i].transform.localScale.y / 2)) - checkTL.y;
                             }
@@ -395,20 +405,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsTL.Length; i++)
                     {
-                        if (newTR.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2)) &&
-                            newTR.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2))) //top of check is within the platforms y range
+                        if (newTR.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2) + .01f) &&
+                            newTR.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTR.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2)) &&
-                                newTR.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newTR.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2) + .01f) &&
+                                newTR.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2)) - checkTR.y;
                             }
                         }
-                        else if (newTL.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2)) &&
-                                newTL.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2))) //bottom of check is within the platforms y range
+                        else if (newTL.x > (platormsTL[i].transform.position.x - (platormsTL[i].transform.localScale.x / 2) + .01f) &&
+                                newTL.x < (platormsTL[i].transform.position.x + (platormsTL[i].transform.localScale.x / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newTL.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2)) &&
-                                newTL.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newTL.y > (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2) + .01f) &&
+                                newTL.y < (platormsTL[i].transform.position.y + (platormsTL[i].transform.localScale.y / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsTL[i].transform.position.y - (platormsTL[i].transform.localScale.y / 2)) - checkTL.y;
                             }
@@ -422,20 +432,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsBR.Length; i++)
                     {
-                        if (newTR.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2)) &&
-                            newTR.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2))) //top of check is within the platforms y range
+                        if (newTR.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2) + .01f) &&
+                            newTR.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTR.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2)) &&
-                                newTR.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newTR.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2) + .01f) &&
+                                newTR.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2)) - checkTR.y;
                             }
                         }
-                        else if (newTL.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2)) &&
-                                newTL.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2))) //bottom of check is within the platforms y range
+                        else if (newTL.x > (platormsBR[i].transform.position.x - (platormsBR[i].transform.localScale.x / 2) + .01f) &&
+                                newTL.x < (platormsBR[i].transform.position.x + (platormsBR[i].transform.localScale.x / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newTL.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2)) &&
-                                newTL.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newTL.y > (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2) + .01f) &&
+                                newTL.y < (platormsBR[i].transform.position.y + (platormsBR[i].transform.localScale.y / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsBR[i].transform.position.y - (platormsBR[i].transform.localScale.y / 2)) - checkTL.y;
                             }
@@ -446,20 +456,20 @@ public class CollisionManager : MonoBehaviour
                 {
                     for (int i = 0; i < platormsBL.Length; i++)
                     {
-                        if (newTR.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2)) &&
-                            newTR.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2))) //top of check is within the platforms y range
+                        if (newTR.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2) + .01f) &&
+                            newTR.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2) - .01f)) //top of check is within the platforms y range
                         {
-                            if (newTR.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2)) &&
-                                newTR.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newTR.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2) + .01f) &&
+                                newTR.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2)) - checkTR.y;
                             }
                         }
-                        else if (newTL.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2)) &&
-                                newTL.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2))) //bottom of check is within the platforms y range
+                        else if (newTL.x > (platormsBL[i].transform.position.x - (platormsBL[i].transform.localScale.x / 2) + .01f) &&
+                                newTL.x < (platormsBL[i].transform.position.x + (platormsBL[i].transform.localScale.x / 2) - .01f)) //bottom of check is within the platforms y range
                         {
-                            if (newTL.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2)) &&
-                                newTL.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2))) //right side of check is within the platforms x range
+                            if (newTL.y > (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2) + .01f) &&
+                                newTL.y < (platormsBL[i].transform.position.y + (platormsBL[i].transform.localScale.y / 2) - .01f)) //right side of check is within the platforms x range
                             {
                                 return (platormsBL[i].transform.position.y - (platormsBL[i].transform.localScale.y / 2)) - checkTL.y;
                             }
