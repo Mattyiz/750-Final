@@ -11,9 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public Controls controls;
     private Vector2 moveInput;
 
-    public Transform groundCheck;
     private bool grounded;
-    private LayerMask groundLayerMask;
 
     public float speed = .5f;
     private float yVelocity;
@@ -22,14 +20,12 @@ public class PlayerMovement : MonoBehaviour
     public GameObject menu;
 
     [SerializeField] private CollisionManager collisionManager;
-    private bool justJumped;
 
     // Start is called before the first frame update
     void Awake()
     {
 
         controls = new Controls();
-        groundLayerMask = LayerMask.GetMask("Ground");
 
         yVelocity = 0;
 
@@ -37,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Menu.performed += _ => ToggleMenu();
 
         menuUp = false;
-        justJumped = false;
 
         Enable();
 
@@ -94,12 +89,14 @@ public class PlayerMovement : MonoBehaviour
         //Gravity
         if(!menuUp)
         {
-            move.y = yVelocity;
 
-            if (yVelocity > -3 && !grounded)
+            if (yVelocity > -3)
             {
                 yVelocity -= .8f * Time.fixedDeltaTime;
             }
+
+            move.y = yVelocity;
+
         }
 
         //Die from falling
@@ -120,45 +117,21 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.Log("TR - " + TR + " TL - " + TL + " BR - " + BR + " BL - " + BL);
 
-        if (grounded)
+        move.x = collisionManager.HorizontalCheck(TR, TL, BR, BL, new Vector3(move.x, 0, 0));
+
+        if(move.y == collisionManager.VerticalCheck(TR, TL, BR, BL, new Vector3(0, move.y, 0)) && move.y != 0) //There is no collision vertically
         {
-            if(collisionManager.HorizontalCheck(TR, TL, BR, BL, new Vector3(move.x, 0, 0)))
-            {
-                move.x = 0;
-            }
-        }else
-        {
-            if (collisionManager.HorizontalCheck(TR, TL, BR, BL, move))
-            {
-                move.x = 0;
-            }
-        }
-        if (justJumped)
-        {
-            justJumped = false;
+            grounded = false;
         }
         else
         {
-            if (collisionManager.VerticalCheck(TR, TL, BR, BL, move))
-            {
-                if (move.y <= 0)
-                {
-                    grounded = true;
-                }
-                else
-                {
-                    yVelocity = 0;
-                }
-                move.y = 0;
-                //yVelocity = 0;
-            }
-            else
-            {
-
-                grounded = false;
-            }
+            grounded = true;
+            yVelocity = 0;
         }
+
+        move.y = collisionManager.VerticalCheck(TR, TL, BR, BL, new Vector3(0, move.y, 0));
         
+
         transform.position += move;
     }
 
@@ -173,8 +146,6 @@ public class PlayerMovement : MonoBehaviour
         {
             yVelocity = .4f;
             grounded = false;
-            justJumped = true;
-            transform.position += new Vector3(0, yVelocity, 0);
         }
     }
 }
