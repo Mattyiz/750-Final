@@ -115,6 +115,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 BR = BL;
         BR.x += transform.localScale.x;
 
+        if (collisionManager.ShadowCollision(TR, TL, BL, BR))
+        {
+            Reset();
+        }
+
         //Debug.Log("TR - " + TR + " TL - " + TL + " BR - " + BR + " BL - " + BL);
 
         move.x = collisionManager.HorizontalCheck(TR, TL, BR, BL, new Vector3(move.x, 0, 0));
@@ -130,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         move.y = collisionManager.VerticalCheck(TR, TL, BR, BL, new Vector3(0, move.y, 0));
+        
         
 
         transform.position += move;

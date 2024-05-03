@@ -9,6 +9,7 @@ public class CollisionManager : MonoBehaviour
     [SerializeField] private GameObject[] platormsTR;
     [SerializeField] private GameObject[] platormsBL;
     [SerializeField] private GameObject[] platormsBR;
+    [SerializeField] private GameObject shadow;
 
 
     // Start is called before the first frame update
@@ -481,5 +482,38 @@ public class CollisionManager : MonoBehaviour
 
         return moveVelocity.y;
 
+    }
+
+    public bool ShadowCollision(Vector3 checkTR, Vector3 checkTL, Vector3 checkBL, Vector3 checkBR)
+    {
+        if (checkTL.y > (shadow.transform.position.y - (shadow.transform.localScale.y / 2) + .01f) &&
+            checkTL.y < (shadow.transform.position.y + (shadow.transform.localScale.y / 2) - .01f)) //top of check is within the shadows y range
+        {
+            if (checkTL.x > (shadow.transform.position.x - (shadow.transform.localScale.x / 2) + .01f) &&
+                checkTL.x < (shadow.transform.position.x + (shadow.transform.localScale.x / 2) - .01f)) //left side of check is within the shadows x range
+            {
+                return true;
+            }else if (checkTR.x > (shadow.transform.position.x - (shadow.transform.localScale.x / 2) + .01f) &&
+                    checkTR.x < (shadow.transform.position.x + (shadow.transform.localScale.x / 2) - .01f)) //right side of check is within the shadows x range
+            {
+                return true;
+            }
+        }
+        else if (checkBL.y > (shadow.transform.position.y - (shadow.transform.localScale.y / 2) + .01f) &&
+                checkBL.y < (shadow.transform.position.y + (shadow.transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
+        {
+            if (checkBL.x > (shadow.transform.position.x - (shadow.transform.localScale.x / 2) + .01f) &&
+                checkBL.x < (shadow.transform.position.x + (shadow.transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
+            {
+                return true;
+            }
+            else if (checkBR.x > (shadow.transform.position.x - (shadow.transform.localScale.x / 2) + .01f) &&
+                   checkBR.x < (shadow.transform.position.x + (shadow.transform.localScale.x / 2) - .01f)) //right side of check is within the shadows x range
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
