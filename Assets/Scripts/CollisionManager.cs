@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
-
     [SerializeField] private GameObject[] platormsTL;
     [SerializeField] private GameObject[] platormsTR;
     [SerializeField] private GameObject[] platormsBL;
     [SerializeField] private GameObject[] platormsBR;
-    [SerializeField] private GameObject shadow;
+    [SerializeField] private GameObject[] shadow;
 
+    public bool showCollision;
+    private LineRenderer line;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+
+        showCollision = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        ShowCollision();
     }
 
     public float HorizontalCheck(Vector3 checkTR, Vector3 checkTL, Vector3 checkBL, Vector3 checkBR, Vector3 moveVelocity)
@@ -486,34 +489,218 @@ public class CollisionManager : MonoBehaviour
 
     public bool ShadowCollision(Vector3 checkTR, Vector3 checkTL, Vector3 checkBL, Vector3 checkBR)
     {
-        if (checkTL.y > (shadow.transform.position.y - (shadow.transform.localScale.y / 2) + .01f) &&
-            checkTL.y < (shadow.transform.position.y + (shadow.transform.localScale.y / 2) - .01f)) //top of check is within the shadows y range
+        for(int i = 0; i < shadow.Length; i++)
         {
-            if (checkTL.x > (shadow.transform.position.x - (shadow.transform.localScale.x / 2) + .01f) &&
-                checkTL.x < (shadow.transform.position.x + (shadow.transform.localScale.x / 2) - .01f)) //left side of check is within the shadows x range
+            if (checkTL.y > (shadow[i].transform.position.y - (shadow[i].transform.localScale.y / 2) + .01f) &&
+            checkTL.y < (shadow[i].transform.position.y + (shadow[i].transform.localScale.y / 2) - .01f)) //top of check is within the shadows y range
             {
-                return true;
-            }else if (checkTR.x > (shadow.transform.position.x - (shadow.transform.localScale.x / 2) + .01f) &&
-                    checkTR.x < (shadow.transform.position.x + (shadow.transform.localScale.x / 2) - .01f)) //right side of check is within the shadows x range
+                if (checkTL.x > (shadow[i].transform.position.x - (shadow[i].transform.localScale.x / 2) + .01f) &&
+                    checkTL.x < (shadow[i].transform.position.x + (shadow[i].transform.localScale.x / 2) - .01f)) //left side of check is within the shadows x range
+                {
+                    return true;
+                }
+                else if (checkTR.x > (shadow[i].transform.position.x - (shadow[i].transform.localScale.x / 2) + .01f) &&
+                       checkTR.x < (shadow[i].transform.position.x + (shadow[i].transform.localScale.x / 2) - .01f)) //right side of check is within the shadows x range
+                {
+                    return true;
+                }
+            }
+            else if (checkBL.y > (shadow[i].transform.position.y - (shadow[i].transform.localScale.y / 2) + .01f) &&
+                    checkBL.y < (shadow[i].transform.position.y + (shadow[i].transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
             {
-                return true;
+                if (checkBL.x > (shadow[i].transform.position.x - (shadow[i].transform.localScale.x / 2) + .01f) &&
+                    checkBL.x < (shadow[i].transform.position.x + (shadow[i].transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
+                {
+                    return true;
+                }
+                else if (checkBR.x > (shadow[i].transform.position.x - (shadow[i].transform.localScale.x / 2) + .01f) &&
+                       checkBR.x < (shadow[i].transform.position.x + (shadow[i].transform.localScale.x / 2) - .01f)) //right side of check is within the shadows x range
+                {
+                    return true;
+                }
             }
         }
-        else if (checkBL.y > (shadow.transform.position.y - (shadow.transform.localScale.y / 2) + .01f) &&
-                checkBL.y < (shadow.transform.position.y + (shadow.transform.localScale.y / 2) - .01f)) //bottom of check is within the platforms y range
+        
+
+        return false;
+    }
+
+    public void ShowCollision()
+    {
+        
+        for (int i = 0; i < platormsTR.Length; i++)
         {
-            if (checkBL.x > (shadow.transform.position.x - (shadow.transform.localScale.x / 2) + .01f) &&
-                checkBL.x < (shadow.transform.position.x + (shadow.transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
+            if (showCollision)
             {
-                return true;
+                Vector3 TR = platormsTR[i].transform.position + (platormsTR[i].transform.localScale / 2);
+
+                Vector3 TL = TR;
+                TL.x -= platormsTR[i].transform.localScale.x;
+
+                Vector3 BL = platormsTR[i].transform.position - (platormsTR[i].transform.localScale / 2);
+
+                Vector3 BR = BL;
+                BR.x += platormsTR[i].transform.localScale.x;
+
+                platormsTR[i].GetComponent<SpriteRenderer>().enabled = false;
+
+                line = platormsTR[i].GetComponent<LineRenderer>();
+                line.enabled = true;
+                line.widthMultiplier = 0.2f;
+                line.positionCount = 5;
+
+                Vector3[] points = new Vector3[5];
+                points[0] = TR;
+                points[1] = TL;
+                points[2] = BL;
+                points[3] = BR;
+                points[4] = TR;
+
+                line.SetPositions(points);
+
             }
-            else if (checkBR.x > (shadow.transform.position.x - (shadow.transform.localScale.x / 2) + .01f) &&
-                   checkBR.x < (shadow.transform.position.x + (shadow.transform.localScale.x / 2) - .01f)) //right side of check is within the shadows x range
+            else
             {
-                return true;
+                platormsTR[i].GetComponent<SpriteRenderer>().enabled = true;
+                line = platormsTR[i].GetComponent<LineRenderer>();
+                line.enabled = false;
             }
         }
 
-        return false;
+        for (int i = 0; i < platormsTL.Length; i++)
+        {
+            if (showCollision)
+            {
+                Vector3 TR = platormsTL[i].transform.position + (platormsTL[i].transform.localScale / 2);
+
+                Vector3 TL = TR;
+                TL.x -= platormsTL[i].transform.localScale.x;
+
+                Vector3 BL = platormsTL[i].transform.position - (platormsTL[i].transform.localScale / 2);
+
+                Vector3 BR = BL;
+                BR.x += platormsTL[i].transform.localScale.x;
+
+                platormsTL[i].GetComponent<SpriteRenderer>().enabled = false;
+
+                line = platormsTL[i].GetComponent<LineRenderer>();
+                line.enabled = true;
+                line.widthMultiplier = 0.2f;
+                line.positionCount = 5;
+
+                Vector3[] points = new Vector3[5];
+                points[0] = TR;
+                points[1] = TL;
+                points[2] = BL;
+                points[3] = BR;
+                points[4] = TR;
+
+                line.SetPositions(points);
+
+            }
+            else
+            {
+                platormsTL[i].GetComponent<SpriteRenderer>().enabled = true;
+                line = platormsTL[i].GetComponent<LineRenderer>();
+                line.enabled = false;
+            }
+        }
+
+        for (int i = 0; i < platormsBR.Length; i++)
+        {
+            if (showCollision)
+            {
+                Vector3 TR = platormsBR[i].transform.position + (platormsBR[i].transform.localScale / 2);
+
+                Vector3 TL = TR;
+                TL.x -= platormsBR[i].transform.localScale.x;
+
+                Vector3 BL = platormsBR[i].transform.position - (platormsBR[i].transform.localScale / 2);
+
+                Vector3 BR = BL;
+                BR.x += platormsBR[i].transform.localScale.x;
+
+                platormsBR[i].GetComponent<SpriteRenderer>().enabled = false;
+
+                line = platormsBR[i].GetComponent<LineRenderer>();
+                line.enabled = true;
+                line.widthMultiplier = 0.2f;
+                line.positionCount = 5;
+
+                Vector3[] points = new Vector3[5];
+                points[0] = TR;
+                points[1] = TL;
+                points[2] = BL;
+                points[3] = BR;
+                points[4] = TR;
+
+                line.SetPositions(points);
+
+            }
+            else
+            {
+                platormsBR[i].GetComponent<SpriteRenderer>().enabled = true;
+                line = platormsBR[i].GetComponent<LineRenderer>();
+                line.enabled = false;
+            }
+        }
+
+        for (int i = 0; i < platormsBL.Length; i++)
+        {
+            if (showCollision)
+            {
+                Vector3 TR = platormsBL[i].transform.position + (platormsBL[i].transform.localScale / 2);
+
+                Vector3 TL = TR;
+                TL.x -= platormsBL[i].transform.localScale.x;
+
+                Vector3 BL = platormsBL[i].transform.position - (platormsBL[i].transform.localScale / 2);
+
+                Vector3 BR = BL;
+                BR.x += platormsBL[i].transform.localScale.x;
+
+                platormsBL[i].GetComponent<SpriteRenderer>().enabled = false;
+
+                line = platormsBL[i].GetComponent<LineRenderer>();
+                line.enabled = true;
+                line.widthMultiplier = 0.2f;
+                line.positionCount = 5;
+
+                Vector3[] points = new Vector3[5];
+                points[0] = TR;
+                points[1] = TL;
+                points[2] = BL;
+                points[3] = BR;
+                points[4] = TR;
+
+                line.SetPositions(points);
+
+            }
+            else
+            {
+                platormsBL[i].GetComponent<SpriteRenderer>().enabled = true;
+                line = platormsBL[i].GetComponent<LineRenderer>();
+                line.enabled = false;
+            }
+        }
+        
+    }
+
+    public void ToggleCollision()
+    {
+
+        for (int i = 0; i < shadow.Length; i++)
+        {
+            shadow[i].GetComponent<Shadow>().ToggleCollision();
+        }
+
+        if (showCollision)
+        {
+            showCollision = false;
+        }
+        else
+        {
+            showCollision = true;
+        }
     }
 }

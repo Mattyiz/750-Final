@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private float yVelocity;
 
     public bool menuUp;
+    public bool showCollision;
+    private LineRenderer line;
     public GameObject menu;
 
     [SerializeField] private CollisionManager collisionManager;
@@ -32,7 +34,14 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Menu.Enable();
         controls.Player.Menu.performed += _ => ToggleMenu();
 
+        controls.Player.Debug.Enable();
+        controls.Player.Debug.performed += _ => ToggleCollision();
+
+
         menuUp = false;
+        showCollision = false;
+
+        line = this.GetComponent<LineRenderer>();
 
         Enable();
 
@@ -79,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-
+        ShowCollision();
         Vector3 move = new Vector3(0, 0, 0);
 
         //Horizontal movement
@@ -152,6 +161,58 @@ public class PlayerMovement : MonoBehaviour
         {
             yVelocity = .4f;
             grounded = false;
+        }
+    }
+
+    public void ShowCollision()
+    {
+        if(showCollision)
+        {
+            Vector3 TR = transform.position + (transform.localScale / 2);
+
+            Vector3 TL = TR;
+            TL.x -= transform.localScale.x;
+
+            Vector3 BL = transform.position - (transform.localScale / 2);
+
+            Vector3 BR = BL;
+            BR.x += transform.localScale.x;
+
+            this.GetComponent<SpriteRenderer>().enabled = false;
+
+            line.enabled = true;
+            line.widthMultiplier = 0.2f;
+            line.positionCount = 5;
+
+            Vector3[] points = new Vector3[5];
+            points[0] = TR;
+            points[1] = TL;
+            points[2] = BL;
+            points[3] = BR;
+            points[4] = TR;
+
+            line.SetPositions(points);
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().enabled = true;
+
+            line.enabled = false;
+        }
+        
+    }
+
+    public void ToggleCollision()
+    {
+        collisionManager.ToggleCollision();
+
+        if (showCollision)
+        {
+            showCollision = false;
+        }
+        else
+        {
+            showCollision = true;
         }
     }
 }
