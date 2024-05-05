@@ -226,6 +226,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 845578941}
+        m_TargetAssemblyTypeName: Shadow, Assembly-CSharp
+        m_MethodName: UpdatePositionCooldown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 1381220887}
+        m_TargetAssemblyTypeName: Shadow, Assembly-CSharp
+        m_MethodName: UpdatePositionCooldown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 1780739694}
+        m_TargetAssemblyTypeName: Shadow, Assembly-CSharp
+        m_MethodName: UpdatePositionCooldown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!1 &33821718
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +297,8 @@ MonoBehaviour:
   playerMovement: {fileID: 1594050389}
   speed: 0.026
   cooldownTime: 0.2
-  firstshowCollision: 0
+  finalLevel: 1
+  showCollision: 0
 --- !u!212 &33821720
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -322,7 +359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33821718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.26, y: -12.76, z: 0}
+  m_LocalPosition: {x: -34.42, y: -12.76, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2021,7 +2058,8 @@ MonoBehaviour:
   playerMovement: {fileID: 1594050389}
   speed: 0.026
   cooldownTime: 0.2
-  firstshowCollision: 0
+  finalLevel: 1
+  showCollision: 0
 --- !u!212 &845578942
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3452,6 +3490,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 845578941}
+        m_TargetAssemblyTypeName: Shadow, Assembly-CSharp
+        m_MethodName: UpdateSpeed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 1381220887}
+        m_TargetAssemblyTypeName: Shadow, Assembly-CSharp
+        m_MethodName: UpdateSpeed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 1780739694}
+        m_TargetAssemblyTypeName: Shadow, Assembly-CSharp
+        m_MethodName: UpdateSpeed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!1 &1165080366
 GameObject:
   m_ObjectHideFlags: 0
@@ -4304,7 +4378,8 @@ MonoBehaviour:
   playerMovement: {fileID: 1594050389}
   speed: 0.026
   cooldownTime: 0.2
-  firstshowCollision: 0
+  finalLevel: 1
+  showCollision: 0
 --- !u!212 &1381220888
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4975,7 +5050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.2
   menuUp: 0
-  firstshowCollision: 0
+  showCollision: 0
   menu: {fileID: 273668848}
   collisionManager: {fileID: 2006497906}
 --- !u!212 &1594050390
@@ -5184,7 +5259,8 @@ MonoBehaviour:
   playerMovement: {fileID: 1594050389}
   speed: 0.026
   cooldownTime: 0.2
-  firstshowCollision: 0
+  finalLevel: 1
+  showCollision: 0
 --- !u!212 &1780739695
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5869,7 +5945,7 @@ MonoBehaviour:
   - {fileID: 845578940}
   - {fileID: 1381220886}
   - {fileID: 1780739693}
-  firstshowCollision: 0
+  showCollision: 0
 --- !u!4 &2006497907
 Transform:
   m_ObjectHideFlags: 0
