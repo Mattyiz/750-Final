@@ -298,6 +298,7 @@ MonoBehaviour:
   speed: 0.026
   cooldownTime: 0.2
   finalLevel: 1
+  aiPhase: 4
   showCollision: 0
 --- !u!212 &33821720
 SpriteRenderer:
@@ -2059,6 +2060,7 @@ MonoBehaviour:
   speed: 0.026
   cooldownTime: 0.2
   finalLevel: 1
+  aiPhase: 3
   showCollision: 0
 --- !u!212 &845578942
 SpriteRenderer:
@@ -4379,6 +4381,7 @@ MonoBehaviour:
   speed: 0.026
   cooldownTime: 0.2
   finalLevel: 1
+  aiPhase: 2
   showCollision: 0
 --- !u!212 &1381220888
 SpriteRenderer:
@@ -5260,6 +5263,7 @@ MonoBehaviour:
   speed: 0.026
   cooldownTime: 0.2
   finalLevel: 1
+  aiPhase: 1
   showCollision: 0
 --- !u!212 &1780739695
 SpriteRenderer:
