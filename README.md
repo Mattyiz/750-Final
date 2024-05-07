@@ -1,7 +1,11 @@
 Matt Izzo
+
 IGME 750 Final
+
 Genre: 2D platformer
+
 Build: Unity 2022.3.4f1 with no external dependencies
+
 Target platform: Windows
 
 Features:
