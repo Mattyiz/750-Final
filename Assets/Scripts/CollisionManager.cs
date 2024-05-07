@@ -9,6 +9,7 @@ public class CollisionManager : MonoBehaviour
     [SerializeField] private GameObject[] platormsBL;
     [SerializeField] private GameObject[] platormsBR;
     [SerializeField] private GameObject[] shadow;
+    [SerializeField] private GameObject[] goal;
 
     public bool showCollision;
     private LineRenderer line;
@@ -525,6 +526,44 @@ public class CollisionManager : MonoBehaviour
         return false;
     }
 
+    public bool GoalCollision(Vector3 checkTR, Vector3 checkTL, Vector3 checkBL, Vector3 checkBR)
+    {
+        for (int i = 0; i < goal.Length; i++)
+        {
+            if (checkTL.y > (goal[i].transform.position.y - (goal[i].transform.localScale.y) + .01f) &&
+            checkTL.y < (goal[i].transform.position.y + (goal[i].transform.localScale.y) - .01f)) //top of check is within the shadows y range
+            {
+                if (checkTL.x > (goal[i].transform.position.x - (goal[i].transform.localScale.x / 2) + .01f) &&
+                    checkTL.x < (goal[i].transform.position.x + (goal[i].transform.localScale.x / 2) - .01f)) //left side of check is within the shadows x range
+                {
+                    return true;
+                }
+                else if (checkTR.x > (goal[i].transform.position.x - (goal[i].transform.localScale.x / 2) + .01f) &&
+                       checkTR.x < (goal[i].transform.position.x + (goal[i].transform.localScale.x / 2) - .01f)) //right side of check is within the shadows x range
+                {
+                    return true;
+                }
+            }
+            else if (checkBL.y > (goal[i].transform.position.y - (goal[i].transform.localScale.y) + .01f) &&
+                    checkBL.y < (goal[i].transform.position.y + (goal[i].transform.localScale.y) - .01f)) //bottom of check is within the platforms y range
+            {
+                if (checkBL.x > (goal[i].transform.position.x - (goal[i].transform.localScale.x / 2) + .01f) &&
+                    checkBL.x < (goal[i].transform.position.x + (goal[i].transform.localScale.x / 2) - .01f)) //left side of check is within the platforms x range
+                {
+                    return true;
+                }
+                else if (checkBR.x > (goal[i].transform.position.x - (goal[i].transform.localScale.x / 2) + .01f) &&
+                       checkBR.x < (goal[i].transform.position.x + (goal[i].transform.localScale.x / 2) - .01f)) //right side of check is within the shadows x range
+                {
+                    return true;
+                }
+            }
+        }
+
+
+        return false;
+    }
+
     public void ShowCollision()
     {
         
@@ -683,7 +722,48 @@ public class CollisionManager : MonoBehaviour
                 line.enabled = false;
             }
         }
-        
+
+        for (int i = 0; i < goal.Length; i++)
+        {
+            if (showCollision)
+            {
+                Vector3 TR = goal[i].transform.position + (goal[i].transform.localScale / 2);
+                TR.y = goal[i].transform.position.y + (goal[i].transform.localScale.y);
+
+                Vector3 TL = TR;
+                TL.x -= goal[i].transform.localScale.x;
+
+                Vector3 BL = goal[i].transform.position - (goal[i].transform.localScale / 2);
+                BL.y = goal[i].transform.position.y - (goal[i].transform.localScale.y);
+
+                Vector3 BR = BL;
+                BR.x += goal[i].transform.localScale.x;
+
+                goal[i].GetComponent<SpriteRenderer>().enabled = false;
+
+                line = goal[i].GetComponent<LineRenderer>();
+                line.enabled = true;
+                line.widthMultiplier = 0.2f;
+                line.positionCount = 5;
+
+                Vector3[] points = new Vector3[5];
+                points[0] = TR;
+                points[1] = TL;
+                points[2] = BL;
+                points[3] = BR;
+                points[4] = TR;
+
+                line.SetPositions(points);
+
+            }
+            else
+            {
+                goal[i].GetComponent<SpriteRenderer>().enabled = true;
+                line = goal[i].GetComponent<LineRenderer>();
+                line.enabled = false;
+            }
+        }
+
     }
 
     public void ToggleCollision()
@@ -703,4 +783,6 @@ public class CollisionManager : MonoBehaviour
             showCollision = true;
         }
     }
+
+
 }

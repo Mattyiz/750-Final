@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shadow : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private float speed = .15f;
-    [SerializeField] private float cooldownTime = .5f;
+    [SerializeField] private float speed;
+    [SerializeField] private float cooldownTime;
     [SerializeField] private bool finalLevel;
     [SerializeField] private int aiPhase = 0;
+
+    [SerializeField] private Slider speedSlider;
+    [SerializeField] private Slider coolDownSlider;
     private Vector3 targetPoint;
     private int direction;
 
@@ -35,6 +39,11 @@ public class Shadow : MonoBehaviour
         //aiPhase = 0;
         targetPoint = transform.position;
         direction = -1;
+
+        Load();
+
+        speedSlider.value = speed;
+        coolDownSlider.value = cooldownTime;
 
     }
 
@@ -85,7 +94,16 @@ public class Shadow : MonoBehaviour
 
     public void Save()
     {
-        JsonUtility.ToJson(speed);
+        PlayerPrefs.SetFloat("Speed", speed);
+        PlayerPrefs.SetFloat("Int", cooldownTime);
+        PlayerPrefs.Save();
+    }
+
+    public void Load()
+    {
+        speed = PlayerPrefs.GetFloat("Speed", .15f);
+        cooldownTime = PlayerPrefs.GetFloat("Int", .15f);
+
     }
 
     public void ShowCollision()

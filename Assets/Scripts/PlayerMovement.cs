@@ -124,6 +124,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 BR = BL;
         BR.x += transform.localScale.x;
 
+        if (collisionManager.GoalCollision(TR, TL, BL, BR))
+        {
+            NextScene();
+        }
+
         if (collisionManager.ShadowCollision(TR, TL, BL, BR))
         {
             Reset();
@@ -153,6 +158,11 @@ public class PlayerMovement : MonoBehaviour
     private void Reset()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void NextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void Jump()
